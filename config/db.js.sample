@@ -1,0 +1,4 @@
+module.exports = {
+	url: 'mongodb://user:password@aa111111.mlab.com:11111/dbname',
+	dbname: 'dbname'
+};
