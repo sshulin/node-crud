@@ -31,4 +31,18 @@ module.exports = function(app, db) {
 			}
 		});
 	});
+	app.delete('/guests/:id', (req, res) => {
+		const id = req.params.id;
+		const details = {
+			'_id': new ObjectID(id)
+		};
+
+		db.collection('guests').remove(details, (err, item) => {
+			if (err) {
+				res.send({'error': 'Something went wrong'});
+			} else {
+				res.send('Guest ' + id + ' deleted');
+			}
+		});
+	});
 };
