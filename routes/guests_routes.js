@@ -31,6 +31,27 @@ module.exports = function(app, db) {
 			}
 		});
 	});
+	app.put('/guests/:id', (req, res) => {
+		const id = req.params.id;
+		const details = {
+			'_id': new ObjectID(id)
+		};
+
+		const guest = {};
+
+		if (req.body.forename) guest.forename = req.body.forename;
+		if (req.body.surname) guest.surname = req.body.surname;
+		if (req.body.patronym) guest.patronym = req.body.patronym;
+		if (req.body.brooms) guest.brooms = req.body.brooms;
+
+		db.collection('guests').update(details, guest, (err, result) => {
+			if (err) {
+				res.send({'error': 'Something went wrong'});
+			} else {
+				res.send(guest);
+			}
+		})
+	});
 	app.delete('/guests/:id', (req, res) => {
 		const id = req.params.id;
 		const details = {
